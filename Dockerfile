@@ -1,9 +1,12 @@
-FROM python:3.7-alpine
-WORKDIR /code
-ENV FLASK_APP setup.py
-ENV FLASK_RUN_HOST 0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
+FROM python:3.5.3
+
+RUN apt-get update && apt-get install -y build-essential
+
+ENV APP_HOME /indico
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD requirements.txt $APP_HOME
 RUN pip install -r requirements.txt
-COPY . .
-CMD ["flask", "run"]
+
+ADD . $APP_HOME
