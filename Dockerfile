@@ -7,6 +7,6 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 ADD requirements.txt $APP_HOME
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.in
 
 ADD . $APP_HOME
